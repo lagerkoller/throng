@@ -1,0 +1,37 @@
+<config>
+	<outputIp ip="127.0.0.1"/>
+	<outputPort port="3333"/>
+	
+	<!-- useOffsets tells Throng to use the offset and crop attributes provided in this XML file -->
+	<useOffsets value="true"/>
+
+	<!-- offsets for all clients. total sum for eah - the x and the y - offset must be 1 (offsetXLeft + offsetX (of each client) + offsetXRight = 1. the same for y. -->
+	<offsetXLeft value="0"/>
+	<offsetXRight value="0"/>
+	<offsetYTop value="0"/>
+	<offsetYBottom value="0"/>
+
+	<clients>
+	<!-- 
+		address: on which ip a package from this client arrives
+		port: on which port a package from this client arrives
+		type: fiducial|touch|both (if fiducial or touch, other messages than fiducial or touch will be rejected)
+		flipRotation: flip rotation of fiducials
+		flipXAndY: flip x coordinate with y coordinate and vice versa
+		
+		following attributes do only work if useOffsets is set to true:
+		offsetX: tuio messages from this client will be clamped between offsetX and offsetWidth. The offset starts with the sum of all offsetX and offsetWidth of all clients before.
+		offsetY: see offsetX
+		offsetWidth: see offsetX
+		offsetHeight: see offsetY 
+		overlapXLeft: overlapping area with left x neighbour (does not work)
+		overlapXRight: overlapping area with right x neighbour (does not work)
+		cropStartY: tuio y values smaller than cropStartY will be rejected.
+		cropEndY: tuio y values bigger than cropStartY will be rejected.
+	-->
+		<client address="127.0.0.1" port="3332" offsetX="0" offsetY="0" offsetWidth="0.5" offsetHeight="1" overlapXLeft="0" overlapXRight="0" type="both" cropStartY="0" cropEndY="1" flipRotation="false" flipXAndY="false" />
+		
+		<client address="127.0.0.1" port="3331" offsetX="0.5" offsetY="0" offsetWidth="0.5" offsetHeight="1" overlapXLeft="0" overlapXRight="0" type="both" cropStartY="0" cropEndY="1" flipRotation="false" flipXAndY="false" />
+
+		</clients>
+</config>
