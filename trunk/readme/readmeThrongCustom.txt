@@ -10,5 +10,12 @@ Throng uses other libraries. Beware the licenses.
 
 Version history
 
-v007
+v011
+Improved range handling of different Tuio producers. Now, each producer has 100,000 ids that it can use. If a session id from a producer outranges this amount, it will start from the beginning of the range. If, e.g., 3 Tuio producers send packets, the ids of the first producer range from 0 to 99,999, the second from 100,000 to 199,999 and the third from 200,000 to 299,000.
+
+v010
+added support for Tuio blob messages /tuio/2dblb.
+improved exception handling.
+
+v008
 Initial version
