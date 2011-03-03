@@ -7,7 +7,7 @@ public class Constants {
 	public static final String HOMEPAGE_TEXT = "Throng Google Code Page";
 	
 	public static final int TUIO_SESSION_ID_RANGE = 100000;
-	public static final String VERSION = "v011";
+	public static final String VERSION = "v012";
 	
 	public static final String DEFAULT_IP = "127.0.0.1";
 	
