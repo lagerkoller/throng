@@ -23,14 +23,13 @@ import javax.swing.JTextField;
 
 import loader.ThrongLoader;
 import mac.MacAboutHandler;
-import mac.MacAppEventListener;
 import throngModel.Host;
 import throngModel.ThrongClient;
 import util.Config;
 import util.Constants;
 
-import com.apple.eawt.Application;
 import com.muchsoft.util.Sys;
+import com.muchsoft.util.mac.Java14Adapter;
 
 import flosc.Debug;
 import flosc.Gateway;
@@ -145,8 +144,7 @@ public class ThrongManualGUI extends JFrame implements MouseListener{
 			   System.setProperty("apple.awt.graphics.EnableQ2DX", "true");
 			   System.setProperty("apple.laf.useScreenMenuBar", "true");
 			   System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Throng Custom");
-			   Application.getApplication().addAppEventListener(new MacAppEventListener());
-			   Application.getApplication().setAboutHandler(new MacAboutHandler(this));
+			   Java14Adapter.registerJava14Handler(new MacAboutHandler(this));
 			   return new MacJMenuBar(this);
 		   }else{
 			   return new WindowsJMenuBar(this);

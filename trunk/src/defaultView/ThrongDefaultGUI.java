@@ -12,19 +12,18 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
 import mac.MacAboutHandler;
-import mac.MacAppEventListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.apple.eawt.Application;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 import com.muchsoft.util.Sys;
+import com.muchsoft.util.mac.Java14Adapter;
 
 import flosc.Debug;
 import flosc.Gateway;
@@ -53,7 +52,7 @@ public class ThrongDefaultGUI extends JFrame{
 		setCorrectLookAndFeel();
 		
 		setResizable(false);
-		setBounds(100, 100, 290, 275);
+		
 		
 		setTitle("Throng "+Constants.VERSION);
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
@@ -201,11 +200,10 @@ public class ThrongDefaultGUI extends JFrame{
 	    */
 	   private void setCorrectLookAndFeel(){
 		   if(Sys.isMacOSX()){
-			   Application.getApplication().addAppEventListener(new MacAppEventListener());
-			   Application.getApplication().setAboutHandler(new MacAboutHandler(this));
+			   Java14Adapter.registerJava14Handler(new MacAboutHandler(this));
+			   setBounds(100, 100, 290, 275);
 		   }else{
-			   //TODO set Windows/Linux look and feel
-			   
+			   setBounds(100, 100, 290, 290);
 		   }
 		}
 	   
