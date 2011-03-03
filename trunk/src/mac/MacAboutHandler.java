@@ -4,8 +4,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
-import com.apple.eawt.AboutHandler;
-import com.apple.eawt.AppEvent.AboutEvent;
+import com.muchsoft.util.mac.Java14Handler;
+
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -13,12 +13,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.EventObject;
 
 import javax.swing.JTextPane;
 
 import util.Constants;
 
-public class MacAboutHandler extends JDialog implements AboutHandler {
+public class MacAboutHandler extends JDialog implements Java14Handler {
 	private JFrame owner;
 	
 	public MacAboutHandler(JFrame owner) {
@@ -82,7 +83,41 @@ public class MacAboutHandler extends JDialog implements AboutHandler {
 		
 	}
 
-	public void handleAbout(AboutEvent arg0) {
+//	public void handleAbout(AboutEvent arg0) {
+//		this.setVisible(true);
+//	}
+
+	public void handleAbout(EventObject arg0) {
 		this.setVisible(true);
+	}
+
+	public void handleOpenApplication(EventObject arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void handleOpenFile(EventObject arg0, String arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void handlePrefs(EventObject arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void handlePrintFile(EventObject arg0, String arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void handleQuit(EventObject arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void handleReOpenApplication(EventObject arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
