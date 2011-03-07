@@ -58,23 +58,15 @@ public class MacAboutHandler extends JDialog implements Java14Handler {
 		      //other MouseListener methods 
 
 			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 
 		    });
@@ -83,41 +75,25 @@ public class MacAboutHandler extends JDialog implements Java14Handler {
 		
 	}
 
-//	public void handleAbout(AboutEvent arg0) {
-//		this.setVisible(true);
-//	}
-
 	public void handleAbout(EventObject arg0) {
 		this.setVisible(true);
 	}
 
 	public void handleOpenApplication(EventObject arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void handleOpenFile(EventObject arg0, String arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void handlePrefs(EventObject arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void handlePrintFile(EventObject arg0, String arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void handleQuit(EventObject arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void handleReOpenApplication(EventObject arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }
