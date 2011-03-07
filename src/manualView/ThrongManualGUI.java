@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 
 import loader.ThrongLoader;
 import mac.MacAboutHandler;
+import mac.MacApplicationHandler;
 import throngModel.Host;
 import throngModel.ThrongClient;
 import util.Config;
@@ -145,6 +146,7 @@ public class ThrongManualGUI extends JFrame implements MouseListener{
 			   System.setProperty("apple.laf.useScreenMenuBar", "true");
 			   System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Throng Custom");
 			   Java14Adapter.registerJava14Handler(new MacAboutHandler(this));
+			   Java14Adapter.registerJava14Handler(new MacApplicationHandler());
 			   return new MacJMenuBar(this);
 		   }else{
 			   return new WindowsJMenuBar(this);
@@ -291,30 +293,30 @@ public class ThrongManualGUI extends JFrame implements MouseListener{
 		hostRows.remove(removeButton.getHostRow());
 		pack();
 	}
-	public static void main(String[] args) {
-		//Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new ThrongManualGUI("Throng Custom "+Constants.VERSION);
-            }
-        });
-        
-        int i=0;
-		boolean correctParameterFound=false;
-		for(String arg:args){
-			if(arg.equals("-debug")){
-				correctParameterFound = true;
-				try{
-					Debug.enableDebug(Boolean.parseBoolean(args[i+1]));
-				}catch(ArrayIndexOutOfBoundsException e){}
-			}
-			i = i+1;
-		}
-		if(args.length>0 && !correctParameterFound){
-			System.out.println("Usage: -debug true|false.");
-		}
-	}
+//	public static void main(String[] args) {
+//		//Schedule a job for the event-dispatching thread:
+//        //creating and showing this application's GUI.
+//        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                new ThrongManualGUI("Throng Custom "+Constants.VERSION);
+//            }
+//        });
+//        
+//        int i=0;
+//		boolean correctParameterFound=false;
+//		for(String arg:args){
+//			if(arg.equals("-debug")){
+//				correctParameterFound = true;
+//				try{
+//					Debug.enableDebug(Boolean.parseBoolean(args[i+1]));
+//				}catch(ArrayIndexOutOfBoundsException e){}
+//			}
+//			i = i+1;
+//		}
+//		if(args.length>0 && !correctParameterFound){
+//			System.out.println("Usage: -debug true|false.");
+//		}
+//	}
 	
 	public boolean isSingleTUIOMode() {
 		return singleTUIOMode;

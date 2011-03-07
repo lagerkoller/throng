@@ -12,6 +12,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
 import mac.MacAboutHandler;
+import mac.MacApplicationHandler;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -201,6 +202,7 @@ public class ThrongDefaultGUI extends JFrame{
 	   private void setCorrectLookAndFeel(){
 		   if(Sys.isMacOSX()){
 			   Java14Adapter.registerJava14Handler(new MacAboutHandler(this));
+			   Java14Adapter.registerJava14Handler(new MacApplicationHandler());
 			   setBounds(100, 100, 290, 275);
 		   }else{
 			   setBounds(100, 100, 290, 290);
