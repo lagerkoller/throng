@@ -31,7 +31,7 @@
 	-->
 		<client address="127.0.0.1" port="3332" offsetX="0" offsetY="0" offsetWidth="0.5" offsetHeight="1" overlapXLeft="0" overlapXRight="0" type="both" cropStartY="0" cropEndY="1" flipRotation="false" flipXAndY="false" />
 		
-		<client address="127.0.0.1" port="3331" offsetX="0.5" offsetY="0" offsetWidth="0.5" offsetHeight="1" overlapXLeft="0" overlapXRight="0" type="both" cropStartY="0" cropEndY="1" flipRotation="false" flipXAndY="false" />
+		<client address="127.0.0.1" port="3334" offsetX="0.5" offsetY="0" offsetWidth="0.5" offsetHeight="1" overlapXLeft="0" overlapXRight="0" type="both" cropStartY="0" cropEndY="1" flipRotation="false" flipXAndY="false" />
 
 		</clients>
 </config>
