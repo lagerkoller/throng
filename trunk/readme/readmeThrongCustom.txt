@@ -9,6 +9,10 @@ Throng Custom looks for the file client.xml in its folder.
 Throng uses other libraries. Beware the licenses.
 
 Version history
+
+v013
+major code redesign. added GPLv3 license. lots of bugfixing.
+
 v012
 added support for Windows (before Throng would crash under Windows because of some Mac specific Java classes)
 removed obsolete XML library dependencies

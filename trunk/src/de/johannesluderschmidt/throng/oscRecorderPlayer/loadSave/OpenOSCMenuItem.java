@@ -66,10 +66,14 @@ public class OpenOSCMenuItem extends JMenuItem implements ActionListener{
 			  File selectedFile = chooser.getSelectedFile();
 			  String fileName = selectedFile.toString(); 
 
-			  Debug.writeActivity("Load file: "+fileName, this);
-			  ArrayList<OSCRecordedPacket> loadedPackets = (new OSCLoader()).load(selectedFile); 
-			  if(loadedPackets != null){
-				  loaderSaverInterface.setRecordedPackets(loadedPackets);
+			  if(fileName.toLowerCase().endsWith(".osc")){
+				  Debug.writeActivity("Load file: "+fileName, this);
+				  ArrayList<OSCRecordedPacket> loadedPackets = (new OSCLoader()).load(selectedFile); 
+				  if(loadedPackets != null){
+					  loaderSaverInterface.setRecordedPackets(loadedPackets);
+				  }
+			  }else{
+				  Debug.writeActivity("I cannot load "+fileName+". I can only load files of type '.osc'.", this);  
 			  }
 		  }
 	}
