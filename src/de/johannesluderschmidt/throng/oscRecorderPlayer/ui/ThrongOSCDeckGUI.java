@@ -46,14 +46,14 @@ import de.johannesluderschmidt.throng.proxy.ThrongMultiplexer;
 import de.johannesluderschmidt.throng.proxy.ThrongProxy;
 import de.johannesluderschmidt.throng.util.Constants;
 
-public class DeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSaverInterface{
+public class ThrongOSCDeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSaverInterface{
 	private DeckControlPanel deckControlGui;
 	private NetworkControlPanel networkControlGui;
 	private JPanel containerPanel;
 	
 	private boolean proxyStarted;
 	
-	public DeckGUI() {
+	public ThrongOSCDeckGUI() {
 		super();
 
 		containerPanel = new JPanel();
@@ -82,7 +82,7 @@ public class DeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSaverInterfa
 		});
 	}
 	private void setupWindow(){
-		setTitle("OSCRecorderPlayer");
+		setTitle("ThrongOSCDeck "+Constants.THRONG_VERSION);
 		setResizable(false);
 		
 		BoxLayout layout = new BoxLayout(containerPanel, BoxLayout.Y_AXIS);

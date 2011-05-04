@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,18 +32,19 @@ import java.util.StringTokenizer;
 import com.illposed.osc.OSCBundle;
 import com.illposed.osc.OSCMessage;
 
+import de.johannesluderschmidt.simpleDebug.Debug;
 import de.johannesluderschmidt.throng.oscRecorderPlayer.recorder.OSCRecordedPacket;
 
 public class OSCLoader {
 	
 	public ArrayList<OSCRecordedPacket> load(File inputFile){
 		ArrayList<OSCRecordedPacket> recordedPackets = null;
+		LineNumberReader in = null;
 		try{
 			recordedPackets = new ArrayList<OSCRecordedPacket>();
-			BufferedReader in = new BufferedReader(new FileReader(inputFile));
-			
+			in = new LineNumberReader(new FileReader(inputFile));
+//			LineNumberReader lineReader = new LineNumberReader(in); 
 			while(in.ready()){ 
-				
 				//read all empty lines before/between different bundles until there starts a new one
 				boolean bundleStarted = false;
 				String line = null;
@@ -64,8 +66,23 @@ public class OSCLoader {
 				bundle.setPortOut(portOut);
 				recordedPackets.add(new OSCRecordedPacket(bundle, executionTime));
 			}
+		}catch(IOException e){
+			String errorString = "Error while reading from file "+inputFile;
+			if(in != null){
+				Debug.writeException(errorString+" in line number "+in.getLineNumber()+". Message: "+e.getMessage(), this, e);
+			}else{
+				Debug.writeException(errorString+". Message: "+e.getMessage(), this, e);
+			}
+			
+			recordedPackets = null;
 		}catch(Exception e){
-			e.printStackTrace();
+			String errorString = "Error while reading from file "+inputFile;
+			if(in != null){
+				Debug.writeException(errorString+" in line number "+in.getLineNumber()+". Message: "+e.getMessage(), this, e);
+			}else{
+				Debug.writeException(errorString+". Message: "+e.getMessage(), this, e);
+			}
+			
 			recordedPackets = null;
 		}
 		if(recordedPackets != null && recordedPackets.size() == 0){
@@ -74,7 +91,7 @@ public class OSCLoader {
 		return recordedPackets;
 	}
 	
-	private OSCMessage readMessage(String line) throws IOException{
+	private OSCMessage readMessage(String line) throws IOException, Exception{
 		StringTokenizer stok = new StringTokenizer(line);
 		String address = stok.nextToken();
 		Object [] arguments = new Object[stok.countTokens()];
@@ -92,6 +109,8 @@ public class OSCLoader {
 				arguments[i] = null;
 			}else if(nextToken.substring(0, 1).equals("t")){
 				arguments[i] = new Date(new Long(nextToken.substring(1,nextToken.length())));
+			}else{
+				throw new Exception("Data type '"+nextToken.substring(0, 1)+"' unknown. Must be 's' for String, 'i' for integer, 'f' for float or 't' for timestamp.");
 			}
 			i = i+1;
 		}
@@ -99,7 +118,7 @@ public class OSCLoader {
 		return new OSCMessage(address, arguments);
 	}
 	
-	private OSCBundle readOSCBundle(BufferedReader in) throws IOException{
+	private OSCBundle readOSCBundle(BufferedReader in) throws IOException, Exception{
 		boolean bundleEnded = false;
 		ArrayList<OSCMessage> messages = new ArrayList<OSCMessage>();
 		while(!bundleEnded){

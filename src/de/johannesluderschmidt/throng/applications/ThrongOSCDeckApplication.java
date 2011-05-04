@@ -23,10 +23,10 @@ import java.awt.EventQueue;
 import com.muchsoft.util.Sys;
 
 import de.johannesluderschmidt.simpleDebug.Debug;
-import de.johannesluderschmidt.throng.oscRecorderPlayer.ui.DeckGUI;
+import de.johannesluderschmidt.throng.oscRecorderPlayer.ui.ThrongOSCDeckGUI;
 
 
-public class ThrongDeckApplication {
+public class ThrongOSCDeckApplication {
 
 	/**
 	 * @param args
@@ -43,7 +43,7 @@ public class ThrongDeckApplication {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new DeckGUI();
+					new ThrongOSCDeckGUI();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
