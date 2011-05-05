@@ -30,55 +30,53 @@ import com.illposed.osc.OSCBundle;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPacket;
 
+import de.johannesluderschmidt.simpleDebug.Debug;
 import de.johannesluderschmidt.throng.oscRecorderPlayer.recorder.OSCRecordedPacket;
 
 public class OSCSaver {
 	public void save(File outputFile, ArrayList<OSCRecordedPacket> recordedPackets){
 		try {  
 			BufferedWriter out = new BufferedWriter(new FileWriter(outputFile));  
-			out.write(getSaveString(recordedPackets));  
+			writeSaveString(out, recordedPackets);  
 			out.close(); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	public String getSaveString(ArrayList<OSCRecordedPacket> recordedPackets){
-		String outputString = "";
+	public void writeSaveString(BufferedWriter out, ArrayList<OSCRecordedPacket> recordedPackets) throws IOException{
+		long start = System.currentTimeMillis();
 		for(OSCRecordedPacket recordedPacket:recordedPackets){
-			outputString = outputString + "\n";
-			outputString = outputString + recordedPacket.getExecutionTime() + "\n";
-			outputString = outputString + recordedPacket.getOscBundle().getIpAddress().getHostAddress() + "\n";
-			outputString = outputString + recordedPacket.getOscBundle().getPortOut() + "\n";
-			outputString = outputString + getOSCBundleSaveString(recordedPacket.getOscBundle());
+			out.write("\n");
+			out.write(recordedPacket.getExecutionTime() + "\n");
+			out.write(recordedPacket.getOscBundle().getIpAddress().getHostAddress() + "\n");
+			out.write(recordedPacket.getOscBundle().getPortOut() + "\n");
+			writeOSCBundleSaveString(out, recordedPacket.getOscBundle());
 		}
-		return outputString; 
+		Debug.writeActivity("Built save string in "+ (System.currentTimeMillis() - start) + "ms", this);
 	}
 	
-	public String getOSCBundleSaveString(OSCBundle bundle){
-		String saveString = "";
+	public void writeOSCBundleSaveString(BufferedWriter out, OSCBundle bundle) throws IOException{
 		int i = 1;
 		for(OSCPacket packet:bundle.getPackets()){
 			OSCMessage message = (OSCMessage) packet;
-			saveString = saveString + message.getAddress();
+			out.write(message.getAddress());
 			for(Object o:message.getArguments()){
 				if(o instanceof String){
-					saveString = saveString + " s" + o;
+					out.write(" s" + o);
 				}else if(o instanceof Integer){
-					saveString = saveString + " i" + o;
+					out.write(" i" + o);
 				}else if(o instanceof Float){
-					saveString = saveString + " f" + o;
+					out.write(" f" + o);
 				}else if(o == null){
-					saveString = saveString + " n" + o;
+					out.write(" n" + o);
 				}else if(o instanceof Date){
 					Date date = (Date) o;
-					saveString = saveString + " t" + date.getTime();
+					out.write(" t" + date.getTime());
 				}
 			}
-			saveString = saveString + "\n";
+			out.write("\n");
 			i = i+1;
 		}
-		
-		return saveString;
 	}
 	
 	
