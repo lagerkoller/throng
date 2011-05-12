@@ -10,6 +10,9 @@ Throng uses other libraries. Beware of the licenses.
 
 Version history
 
+v014
+fixed a bug where saving took ages.
+
 v013
 major code redesign. added GPLv3 license. lots of bugfixing.
 

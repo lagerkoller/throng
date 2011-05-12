@@ -35,5 +35,8 @@ Each bundle is separated from the next by 2 LF.
 
 Version history
 
+v014
+fixed a bug where saving took ages.
+
 v013
 first version.
