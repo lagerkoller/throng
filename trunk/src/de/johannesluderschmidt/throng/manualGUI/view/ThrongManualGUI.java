@@ -53,9 +53,11 @@ import de.johannesluderschmidt.throng.proxy.Config;
 import de.johannesluderschmidt.throng.proxy.Host;
 import de.johannesluderschmidt.throng.proxy.ThrongCropper;
 import de.johannesluderschmidt.throng.proxy.ThrongProxy;
+import de.johannesluderschmidt.throng.proxy.Tuio1_1Terminator;
 import de.johannesluderschmidt.throng.sharedGUIResources.mac.ThrongMacAboutHandler;
 import de.johannesluderschmidt.throng.sharedGUIResources.mac.ThrongMacApplicationHandler;
 import de.johannesluderschmidt.throng.util.Constants;
+import de.johannesluderschmidt.tuio3DExt.Tuio3DExtTerminator;
 
 
 public class ThrongManualGUI extends JFrame implements MouseListener{
@@ -145,7 +147,8 @@ public class ThrongManualGUI extends JFrame implements MouseListener{
 		
 		setResizable(false);
         setVisible(true);
-
+        ThrongProxy.getInstance().addTerminator(new Tuio1_1Terminator());
+        ThrongProxy.getInstance().addTerminator(new Tuio3DExtTerminator());
         try{
         	loadFile(System.getProperty("user.dir")+System.getProperty("file.separator")+Constants.DEFAULT_FILE_NAME);
         }catch(Exception e){}

@@ -25,7 +25,7 @@ public class Constants {
 	public static final String HOMEPAGE_LINK = "http://code.google.com/p/throng";
 	public static final String HOMEPAGE_TEXT = "Throng Google Code Page";
 	
-	public static final String THRONG_VERSION = "v014";
+	public static final String THRONG_VERSION = "v015";
 	public static final String BOTH = "both";
 	
 	public static final int DEFAULT_INPUT_PORT = 3332;

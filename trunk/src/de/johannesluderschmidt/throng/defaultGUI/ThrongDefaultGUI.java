@@ -46,9 +46,11 @@ import com.muchsoft.util.mac.Java14Adapter;
 import de.johannesluderschmidt.simpleDebug.Debug;
 import de.johannesluderschmidt.throng.proxy.ThrongMultiplexer;
 import de.johannesluderschmidt.throng.proxy.ThrongProxy;
+import de.johannesluderschmidt.throng.proxy.Tuio1_1Terminator;
 import de.johannesluderschmidt.throng.sharedGUIResources.mac.ThrongMacAboutHandler;
 import de.johannesluderschmidt.throng.sharedGUIResources.mac.ThrongMacApplicationHandler;
 import de.johannesluderschmidt.throng.util.Constants;
+import de.johannesluderschmidt.tuio3DExt.Tuio3DExtTerminator;
 
 public class ThrongDefaultGUI extends JFrame{
 	private JTextField outgoingPortTextField;
@@ -185,6 +187,8 @@ public class ThrongDefaultGUI extends JFrame{
 				ThrongMultiplexer.getInstance().setMultiplexerEnabled(chckbxAliveMessages.isSelected());
 				ThrongMultiplexer.getInstance().setManageSrcMsg(chckbxManageSourceMsg.isSelected());
 				ThrongProxy.getInstance().startProxy();
+				ThrongProxy.getInstance().addTerminator(new Tuio1_1Terminator());
+				ThrongProxy.getInstance().addTerminator(new Tuio3DExtTerminator());
 				startStopButton.setText("Stop Throng");
 				proxyStarted = true;
 			}catch(UnknownHostException e){
