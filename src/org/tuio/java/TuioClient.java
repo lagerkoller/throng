@@ -22,6 +22,8 @@ package org.tuio.java;
 
 import com.illposed.osc.*;
 
+import de.johannesluderschmidt.simpleDebug.Debug;
+
 import java.util.*;
 
 /**
@@ -378,7 +380,7 @@ public class TuioClient implements OSCListener {
 					currentTime = TuioTime.getSessionTime();
 				}
 				if (!lateFrame) {
-
+					Debug.writeActivity("!lateFrame", this);
 					Enumeration<TuioCursor> frameEnum = frameCursors.elements();
 					while(frameEnum.hasMoreElements()) {
 						TuioCursor tcur = frameEnum.nextElement();

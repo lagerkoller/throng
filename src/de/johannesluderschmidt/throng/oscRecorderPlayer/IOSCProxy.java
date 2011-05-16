@@ -25,4 +25,5 @@ public interface IOSCProxy {
 	boolean isProxyStarted();
 	void startOrStopProxy(boolean start, int inboundPort, InetAddress outboundIp, int outboundPort);
 	void enableStartProxyButton(boolean enable);
+	void resetProxy();
 }

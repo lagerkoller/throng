@@ -137,6 +137,7 @@ public class DeckControlPanel extends JPanel implements ITimeLabelCallback{
 	}
 	public void setRecordedPackets(ArrayList<OSCRecordedPacket> recordedPackets){
 		playButton.setEnabled(true);
+		playButton.requestFocusInWindow();
 		recorder.setRecordedPackets(recordedPackets);
 		recordTimeLabel.setDuration(recorder.getDuration());
 	}
@@ -151,9 +152,8 @@ public class DeckControlPanel extends JPanel implements ITimeLabelCallback{
 		if(deck.isProxyStarted()){
 			deck.startOrStopProxy(false, -1, null, -1);
 			reconnect = true;
-		}else{
-			ThrongProxy.getInstance().resetTuioClientMessages();
 		}
+		deck.resetProxy();
 		deck.enableStartProxyButton(false);
 		player.setRecordedPackets(recorder.getRecordedPackets());
 		player.play();
@@ -164,7 +164,7 @@ public class DeckControlPanel extends JPanel implements ITimeLabelCallback{
 		playButton.setText(STOP_BUTTON_LABEL);
 	}
 	private void stopPlaying(){
-		ThrongProxy.getInstance().resetTuioClientMessages();
+		deck.resetProxy();
 		deck.enableStartProxyButton(true);
 		player.stop();
 		playTimeLabel.stopCounting();
@@ -186,6 +186,9 @@ public class DeckControlPanel extends JPanel implements ITimeLabelCallback{
 			deck.startOrStopProxy(true, -1, null, -1);
 			reconnect = false;
 		}
+	}
+	public void setFocusOnPlayButton(){
+		playButton.requestFocusInWindow();
 	}
 	
 }

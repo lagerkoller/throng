@@ -44,7 +44,9 @@ import de.johannesluderschmidt.throng.oscRecorderPlayer.loadSave.SaveOSCMenuItem
 import de.johannesluderschmidt.throng.oscRecorderPlayer.recorder.OSCRecordedPacket;
 import de.johannesluderschmidt.throng.proxy.ThrongMultiplexer;
 import de.johannesluderschmidt.throng.proxy.ThrongProxy;
+import de.johannesluderschmidt.throng.proxy.Tuio1_1Terminator;
 import de.johannesluderschmidt.throng.util.Constants;
+import de.johannesluderschmidt.tuio3DExt.Tuio3DExtTerminator;
 
 public class ThrongOSCDeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSaverInterface{
 	private DeckControlPanel deckControlGui;
@@ -62,6 +64,8 @@ public class ThrongOSCDeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSav
 		deckControlGui.setMaximumSize(new Dimension(deckControlGui.getPreferredSize().width, 100));
 		networkControlGui = new NetworkControlPanel(this);
 		TuioTime.initSession();
+		ThrongProxy.getInstance().addTerminator(new Tuio1_1Terminator());
+		ThrongProxy.getInstance().addTerminator(new Tuio3DExtTerminator());
 		
 		initProxy();
 		
@@ -158,6 +162,11 @@ public class ThrongOSCDeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSav
 				Debug.writeException("Error when stopping gateway from GUI: "+ex.getMessage(),this, ex);
 			}
 		}
+	}
+	
+	public void resetProxy() {
+		ThrongProxy.getInstance().resetConnectedSources();
+		ThrongProxy.getInstance().resetTuioClientMessages();
 	}
 	public void setRecordedPackets(ArrayList<OSCRecordedPacket> recordedPackets) {
 		deckControlGui.setRecordedPackets(recordedPackets);
