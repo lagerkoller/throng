@@ -6,9 +6,17 @@ If the checkbox "Manage Alive Ids" is checked, the alive ids of all the Tuio mes
 
 If the checkbox "Individualize Ids" is checked (which is only possible if "Manage Alive Ids" is checked), Throng "tries" to individualize the Tuio session ids for you. "Tries" means following simple algorithm: A certain threshold will be added to the session id of each producer in order to prevent session ids to overlap. E.g., no threshold will be added to the ids of producer A, 10,000 will be added to the ids of B, 20,000 to the messages of C and so on. However, after a certain time, session ids could overlap nonetheless. Thus, this approach should be improved.
 
+To start from the command line, do the following:
+- cd to the folder of the jar file
+- java jar jarname.jar
+- optional arguments: -autoStart true|false -inboundPort port -outboundPort port -debug true|false 
+
 Throng uses other libraries. Beware of the licenses.
 
 Version history
+
+v015
+added options for the start from the command line (see explanations above)
 
 v014
 fixed a bug where saving took ages.

@@ -54,7 +54,7 @@ public class NetworkControlPanel extends JPanel {
 	
 	private boolean proxyStarted;
 	
-	public NetworkControlPanel(IOSCProxy deck){
+	public NetworkControlPanel(IOSCProxy deck, int inboundPort, String outboundIp, int outboundPort){
 		this.deck = deck;
 		
 		setLayout(new FormLayout(new ColumnSpec[] {
@@ -95,7 +95,7 @@ public class NetworkControlPanel extends JPanel {
 		add(lblInboundPort, "1, 5, right, default");
 		
 		inboundPortTextField = new JTextField();
-		inboundPortTextField.setText(""+Constants.DEFAULT_INPUT_PORT);
+		inboundPortTextField.setText(""+inboundPort);
 		add(inboundPortTextField, "3, 5, fill, default");
 		inboundPortTextField.setColumns(10);
 		
@@ -103,7 +103,7 @@ public class NetworkControlPanel extends JPanel {
 		add(lblOutboundIP, "1, 7, right, default");
 		
 		outboundIPTextField = new JTextField();
-		outboundIPTextField.setText(Constants.DEFAULT_IP);
+		outboundIPTextField.setText(outboundIp);
 		add(outboundIPTextField, "3, 7, fill, default");
 		outboundIPTextField.setColumns(10);
 		
@@ -111,7 +111,7 @@ public class NetworkControlPanel extends JPanel {
 		add(lblOutboundPort, "1, 9, right, default");
 		
 		outboundPortTextField = new JTextField();
-		outboundPortTextField.setText(""+Constants.DEFAULT_OUTPUT_PORT);
+		outboundPortTextField.setText(""+outboundPort);
 		add(outboundPortTextField, "3, 9, fill, default");
 		outboundPortTextField.setColumns(10);
 		
@@ -139,7 +139,7 @@ public class NetworkControlPanel extends JPanel {
 		
 	}
 	
-	private void startProxy(){
+	public void startProxy(){
 		try{
 			int inboundPort = Integer.parseInt(inboundPortTextField.getText());
 			InetAddress ipAddress = InetAddress.getByName(outboundIPTextField.getText());
@@ -152,7 +152,7 @@ public class NetworkControlPanel extends JPanel {
 		}
 	}
 	
-	private void stopProxy(){
+	public void stopProxy(){
 		deck.startOrStopProxy(false, -1, null, -1);
 	}
 	public void setFocusOnStartButton(){
@@ -172,6 +172,28 @@ public class NetworkControlPanel extends JPanel {
 	}
 	public void enableStartProxyButton(boolean enable){
 		btnStartProxy.setEnabled(enable);
+	}
+	
+	public int getInboundPort(){
+		int returnPort = Constants.DEFAULT_INPUT_PORT;
+		try{
+			returnPort = Integer.parseInt(inboundPortTextField.getText());
+		}catch(Exception e){}
+		
+		return returnPort;
+	}
+	
+	public String getOutboundIp(){
+		return outboundIPTextField.getText();
+	}
+	
+	public int getOutboundPort(){
+		int returnPort = Constants.DEFAULT_OUTPUT_PORT;
+		try{
+			returnPort = Integer.parseInt(outboundPortTextField.getText());
+		}catch(Exception e){}
+		
+		return returnPort;
 	}
 	
 }

@@ -55,14 +55,15 @@ public class ThrongOSCDeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSav
 	
 	private boolean proxyStarted;
 	
-	public ThrongOSCDeckGUI() {
+	public ThrongOSCDeckGUI(int inboundPort, String outboundIp, int outboundPort) {
 		super();
 
 		containerPanel = new JPanel();
 		
 		deckControlGui = new DeckControlPanel(this);
 		deckControlGui.setMaximumSize(new Dimension(deckControlGui.getPreferredSize().width, 100));
-		networkControlGui = new NetworkControlPanel(this);
+		networkControlGui = new NetworkControlPanel(this, inboundPort, outboundIp, outboundPort);
+		
 		TuioTime.initSession();
 		ThrongProxy.getInstance().addTerminator(new Tuio1_1Terminator());
 		ThrongProxy.getInstance().addTerminator(new Tuio3DExtTerminator());
@@ -110,6 +111,12 @@ public class ThrongOSCDeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSav
 		} catch (UnknownHostException e) {
 			Debug.writeException("Could not initialize proxy because I could not resolve the localhost address", this, e);
 		}
+	}
+	public void startProxy(){
+		networkControlGui.startProxy();
+	}
+	public void stopProxy(){
+		networkControlGui.stopProxy();
 	}
 	public void setFocusOnStartButton(){
 		networkControlGui.setFocusOnStartButton();

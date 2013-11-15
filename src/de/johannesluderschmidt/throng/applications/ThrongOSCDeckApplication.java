@@ -24,10 +24,13 @@ import com.muchsoft.util.Sys;
 
 import de.johannesluderschmidt.simpleDebug.Debug;
 import de.johannesluderschmidt.throng.oscRecorderPlayer.ui.ThrongOSCDeckGUI;
+import de.johannesluderschmidt.throng.util.ArgsParser;
 
 
 public class ThrongOSCDeckApplication {
 
+	private static ArgsParser parser;
+	
 	/**
 	 * @param args
 	 */
@@ -40,28 +43,26 @@ public class ThrongOSCDeckApplication {
 			
 		}
 		
+		parser = new ArgsParser(args);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new ThrongOSCDeckGUI();
+					ThrongOSCDeckGUI oscDeck = new ThrongOSCDeckGUI(parser.getInboundPort(), parser.getOutboundIp(), parser.getOutboundPort());
+					if(parser.isAutoStart()){
+						oscDeck.startProxy();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		int i=0;
-		boolean correctParameterFound=false;
-		for(String arg:args){
-			if(arg.equals("-debug")){
-				correctParameterFound = true;
-				try{
-					Debug.enableDebug(Boolean.parseBoolean(args[i+1]));
-				}catch(ArrayIndexOutOfBoundsException e){}
-			}
-			i = i+1;
-		}
-		if(args.length>0 && !correctParameterFound){
-			System.out.println("Usage: -debug true|false.");
+
+		try{
+			Debug.enableDebug(parser.isDebug());
+		}catch(ArrayIndexOutOfBoundsException e){}
+	
+		if(parser.isShowWarning()){
+			System.out.println("Usage: -autoStart true|false -inboundPort port -outboundIp ip -outboundPort port -debug true|false");
 		}
 	}
 

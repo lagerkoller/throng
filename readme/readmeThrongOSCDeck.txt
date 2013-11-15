@@ -33,7 +33,17 @@ by the operating system and has nothing to do with the target port of the OSC da
 
 Each bundle is separated from the next by 2 LF.
 
+To start from the command line, do the following:
+- cd to the folder of the jar file
+- java jar jarname.jar
+- optional arguments: -autoStart true|false -inboundPort port -outboundIp ip -outboundPort port -debug true|false 
+
+Throng uses other libraries. Beware of the licenses.
+
 Version history
+
+v015
+added options for the start from the command line (see explanations above)
 
 v014
 fixed a bug where saving took ages.

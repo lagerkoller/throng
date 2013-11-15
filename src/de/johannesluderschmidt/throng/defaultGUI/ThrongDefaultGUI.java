@@ -62,7 +62,7 @@ public class ThrongDefaultGUI extends JFrame{
 	
 	private boolean proxyStarted = false;
 	
-	public ThrongDefaultGUI() throws HeadlessException {
+	public ThrongDefaultGUI(int inboundPort, int outboundPort) throws HeadlessException {
 		super();
 		
 		setCorrectLookAndFeel();
@@ -101,19 +101,19 @@ public class ThrongDefaultGUI extends JFrame{
 	    }
 		getContentPane().add(ipText, "3, 1, left, center");
 		
-		JLabel incomingPortLabel = new JLabel("Incoming port:");
+		JLabel incomingPortLabel = new JLabel("Inbound port:");
 		getContentPane().add(incomingPortLabel, "1, 3, right, center");
 		
 		incomingPortTextField = new JTextField();
-		incomingPortTextField.setText(""+Constants.DEFAULT_INPUT_PORT);
+		incomingPortTextField.setText(""+inboundPort);
 		incomingPortTextField.setColumns(10);
 		getContentPane().add(incomingPortTextField, "3, 3, left, center");
 		
-		JLabel outgoingPortLabel = new JLabel("Outgoing port:");
+		JLabel outgoingPortLabel = new JLabel("Outbound port:");
 		getContentPane().add(outgoingPortLabel, "1, 5, right, center");
 		
 		outgoingPortTextField = new JTextField();
-		outgoingPortTextField.setText(""+Constants.DEFAULT_OUTPUT_PORT);
+		outgoingPortTextField.setText(""+outboundPort);
 		outgoingPortTextField.setColumns(10);
 		getContentPane().add(outgoingPortTextField, "3, 5, left, center");
 		
@@ -169,13 +169,26 @@ public class ThrongDefaultGUI extends JFrame{
 				ThrongProxy.getInstance().resetTuioClientMessages();
 			}
 		});
-		chckbxManageSourceMsg.setToolTipText("If \"Adapt Src. Msg.\" is selected, the source Ip address and the source port of the Tuio packet will be added after the @ to allow for discerning in the Tuio client application. If no source message is included, it will be created.");
+		chckbxManageSourceMsg.setToolTipText("If \"Manage Src. Msg.\" is selected, the source Ip address and the source port of the Tuio packet will be added after the @ to allow for discerning in the Tuio client application. If no source message is included, it will be created.");
 		chckbxManageSourceMsg.setSelected(true);
 		getContentPane().add(chckbxManageSourceMsg, "3, 13");
 		
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	public void startProxy(){
+		if(!proxyStarted){
+			startOrStopProxy();
+		}
+	}
+	
+	public void stopProxy(){
+		if(proxyStarted){
+			startOrStopProxy();
+		}
+	}
+	
 	private void startOrStopProxy(){
 		if(!proxyStarted){
 			try{
