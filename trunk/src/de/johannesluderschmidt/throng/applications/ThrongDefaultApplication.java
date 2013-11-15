@@ -20,16 +20,21 @@
 package de.johannesluderschmidt.throng.applications;
 
 import java.awt.EventQueue;
+import java.util.HashMap;
 
 
 import com.muchsoft.util.Sys;
 
 import de.johannesluderschmidt.simpleDebug.Debug;
 import de.johannesluderschmidt.throng.defaultGUI.ThrongDefaultGUI;
+import de.johannesluderschmidt.throng.util.ArgsParser;
+import de.johannesluderschmidt.throng.util.Constants;
 
 
 public class ThrongDefaultApplication {
-
+	
+	private static ArgsParser parser;
+	
 	/**
 	 * @param args
 	 */
@@ -42,32 +47,29 @@ public class ThrongDefaultApplication {
 			
 		}
 		
+		parser = new ArgsParser(args); 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ThrongDefaultGUI frame = new ThrongDefaultGUI();
+			
+					ThrongDefaultGUI frame = new ThrongDefaultGUI(parser.getInboundPort(), parser.getOutboundPort());
+					if(parser.isAutoStart()){
+						frame.startProxy();
+					}
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		int i=0;
-		boolean correctParameterFound=false;
-		for(String arg:args){
-			if(arg.equals("-debug")){
-				correctParameterFound = true;
-				try{
-					Debug.enableDebug(Boolean.parseBoolean(args[i+1]));
-				}catch(ArrayIndexOutOfBoundsException e){}
-			}
-			i = i+1;
+		try{
+			Debug.enableDebug(parser.isDebug());
+		}catch(ArrayIndexOutOfBoundsException e){}
+	
+		if(parser.isShowWarning()){
+			System.out.println("Usage: -autoStart true|false -inboundPort port -outboundPort port -debug true|false");
 		}
-		if(args.length>0 && !correctParameterFound){
-			System.out.println("Usage: -debug true|false.");
-		}
-		
-
 	}
+	
 
 }
