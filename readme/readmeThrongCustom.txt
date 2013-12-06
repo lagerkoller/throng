@@ -8,10 +8,15 @@ Throng Custom looks for the file client.xml in its folder.
 
 Throng uses other libraries. Beware the licenses.
 
+To start from the command line, do the following:
+- cd to the folder of the jar file
+- java jar jarname.jar
+- optional arguments: -autoStart true|false -debug true|false
+
 Version history
 
 v015
-no changes 
+added options for the start from the command line (see explanations above)
 
 v014
 fixed a bug where saving took ages.

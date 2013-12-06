@@ -8,7 +8,8 @@ public class ArgsParser {
 	private boolean autoStart;
 	private boolean debug;
 	private boolean showWarning;
-	
+	private boolean minimize;
+
 	public ArgsParser(String[] args) {
 		inboundPort = Constants.DEFAULT_INPUT_PORT;
 		outboundIp = Constants.DEFAULT_IP;
@@ -60,6 +61,15 @@ public class ArgsParser {
 						foundCorrectParameter = true;
 					}else{
 						autoStart = Constants.AUTOSTART;
+					}
+				}
+				
+				if(arg.equals("-minimize")){
+					if(args.length > i+1){
+						minimize = Boolean.parseBoolean(args[i+1]);
+						foundCorrectParameter = true;
+					}else{
+						minimize = Constants.MINIMIZE;
 					}
 				}
 				
@@ -115,5 +125,13 @@ public class ArgsParser {
 
 	public boolean isDebug() {
 		return debug;
+	}
+	
+	public boolean isMinimize() {
+		return minimize;
+	}
+
+	public void setMinimize(boolean minimize) {
+		this.minimize = minimize;
 	}
 }

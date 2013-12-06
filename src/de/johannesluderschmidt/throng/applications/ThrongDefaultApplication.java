@@ -57,6 +57,9 @@ public class ThrongDefaultApplication {
 						frame.startProxy();
 					}
 					frame.setVisible(true);
+					if(parser.isMinimize()){
+						frame.minimize();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

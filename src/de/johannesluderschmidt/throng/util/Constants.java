@@ -32,6 +32,7 @@ public class Constants {
 	public static final String DEFAULT_IP = "127.0.0.1";
 	public static final int DEFAULT_OUTPUT_PORT = 3333;
 	public static final boolean AUTOSTART = false;
+	public static final boolean MINIMIZE = false;
 	public static final boolean DEFAULT_DEBUG = false;
 	
 	public static final String TOUCH = "touch";

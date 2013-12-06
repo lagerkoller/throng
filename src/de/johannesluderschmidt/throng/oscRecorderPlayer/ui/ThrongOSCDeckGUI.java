@@ -21,6 +21,7 @@ package de.johannesluderschmidt.throng.oscRecorderPlayer.ui;
 
 
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.InetAddress;
@@ -169,6 +170,14 @@ public class ThrongOSCDeckGUI extends JFrame implements IOSCProxy, IOSCLoaderSav
 				Debug.writeException("Error when stopping gateway from GUI: "+ex.getMessage(),this, ex);
 			}
 		}
+	}
+	
+	public void minimize(){
+		this.setState(Frame.ICONIFIED);
+	}
+	
+	public void maximize(){
+		this.setState(Frame.NORMAL);
 	}
 	
 	public void resetProxy() {

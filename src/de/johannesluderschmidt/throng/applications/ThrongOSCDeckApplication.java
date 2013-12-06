@@ -51,6 +51,9 @@ public class ThrongOSCDeckApplication {
 					if(parser.isAutoStart()){
 						oscDeck.startProxy();
 					}
+					if(parser.isMinimize()){
+						oscDeck.minimize();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
