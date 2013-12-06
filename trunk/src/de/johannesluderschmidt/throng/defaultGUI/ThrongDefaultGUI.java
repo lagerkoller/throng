@@ -20,6 +20,7 @@
 package de.johannesluderschmidt.throng.defaultGUI;
 
 
+import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -233,6 +234,14 @@ public class ThrongDefaultGUI extends JFrame{
 		   }else{
 			   setBounds(100, 100, 290, 290);
 		   }
+		}
+	   
+	   public void minimize(){
+			this.setState(Frame.ICONIFIED);
+		}
+		
+		public void maximize(){
+			this.setState(Frame.NORMAL);
 		}
 	   
 }

@@ -28,11 +28,13 @@ import com.muchsoft.util.Sys;
 
 import de.johannesluderschmidt.simpleDebug.Debug;
 import de.johannesluderschmidt.throng.manualGUI.view.ThrongManualGUI;
+import de.johannesluderschmidt.throng.util.ArgsParser;
 import de.johannesluderschmidt.throng.util.Constants;
 
 
 public class ThrongManualApplication {
 
+	private static ArgsParser parser;
 	/**
 	 * @param args
 	 */
@@ -45,29 +47,31 @@ public class ThrongManualApplication {
 			
 		}
 		
+		parser = new ArgsParser(args);
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					ThrongManualGUI frame = new ThrongManualGUI("Throng Custom "+Constants.THRONG_VERSION);
+					if(parser.isAutoStart()){
+						frame.startServer();
+					}
 					frame.setVisible(true);
+					if(parser.isMinimize()){
+						frame.minimize();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		int i=0;
-		boolean correctParameterFound=false;
-		for(String arg:args){
-			if(arg.equals("-debug")){
-				correctParameterFound = true;
-				try{
-					Debug.enableDebug(Boolean.parseBoolean(args[i+1]));
-				}catch(ArrayIndexOutOfBoundsException e){}
-			}
-			i = i+1;
-		}
-		if(args.length>0 && !correctParameterFound){
-			System.out.println("Usage: -debug true|false.");
+		
+		try{
+			Debug.enableDebug(parser.isDebug());
+		}catch(ArrayIndexOutOfBoundsException e){}
+	
+		if(parser.isShowWarning()){
+			System.out.println("Usage: -autoStart true|false -debug true|false");
 		}
 
 	}

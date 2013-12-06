@@ -21,6 +21,7 @@ package de.johannesluderschmidt.throng.manualGUI.view;
 
 
 import java.awt.Container;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -350,10 +351,19 @@ public class ThrongManualGUI extends JFrame implements MouseListener{
 		return multipleNetworkTUIOMode;
 	}
 	
-	/**
-	 * triggered when start/stop server is clicked.
-	 */
-	public void mouseClicked(MouseEvent e) {
+	public void startServer(){
+		if(!floscStarted){
+			startOrStopProxy();
+		}
+	}
+	
+	public void stopServer(){
+		if(floscStarted){
+			startOrStopProxy();
+		}
+	}
+	
+	private void startOrStopProxy(){
 		if(!floscStarted){
 			try{
 				try{
@@ -411,6 +421,13 @@ public class ThrongManualGUI extends JFrame implements MouseListener{
 				ThrongProxy.getInstance().stopProxy();
 			}catch(Exception ex){Debug.writeActivity("Error when stopping gateway from GUI: "+ex.getMessage(),this);}	
 		}
+	}
+			
+	/**
+	 * triggered when start/stop server is clicked.
+	 */
+	public void mouseClicked(MouseEvent e) {
+		startOrStopProxy();
 	}
 	
 	public void loadFile(String fileName){
@@ -480,6 +497,13 @@ public class ThrongManualGUI extends JFrame implements MouseListener{
 			}
 			
 		}
+	public void minimize(){
+		this.setState(Frame.ICONIFIED);
+	}
+	
+	public void maximize(){
+		this.setState(Frame.NORMAL);
+	}
 	
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
