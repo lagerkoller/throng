@@ -228,8 +228,8 @@ public class ThrongDefaultGUI extends JFrame{
 	    */
 	   private void setCorrectLookAndFeel(){
 		   if(Sys.isMacOSX()){
-			   Java14Adapter.registerJava14Handler(new ThrongMacAboutHandler(this));
-			   Java14Adapter.registerJava14Handler(new ThrongMacApplicationHandler());
+			   //Java14Adapter.registerJava14Handler(new ThrongMacAboutHandler(this));
+			   //Java14Adapter.registerJava14Handler(new ThrongMacApplicationHandler());
 			   setBounds(100, 100, 290, 275);
 		   }else{
 			   setBounds(100, 100, 290, 290);
